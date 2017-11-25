@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {  NavigatorIOS, AppRegistry } from 'react-native';
 import Login from './app/iOS/Login';
 import {Font} from 'expo';
 
-export default class App extends React.Component {
+
+
+export default class LifeLog extends React.Component {
 
     state = {
         fontLoaded: false,
@@ -17,21 +19,17 @@ export default class App extends React.Component {
     }
 
 
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Login/>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <NavigatorIOS
+                navigationBarHidden={true}
+                initialRoute={{title: "Log In", component: Login}}
+                style = {{flex: 1}}
+            />
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+AppRegistry.registerComponent('LifeLog', () => LifeLog);

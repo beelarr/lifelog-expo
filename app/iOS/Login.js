@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import Register from './Register';
 import firebase from '../Config/Firebase';
 import styles from '../Theme/Theme';
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -22,21 +24,28 @@ class Login extends Component {
         uid: '',
         loading: false,
         fontLoaded: false,
-
-
     };
+
+
+
+
 
     login = () => {
         this.setState({loading: true});
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((data) => {
                 this.setState({uid: data.uid, loading: false});
-                // this.props.navigator.push({ component: Home });
+
             }) .catch ((error) => {
             this.setState({loading: false});
             AlertIOS.alert(error.message);
 
         });
+    };
+
+    register = () => {
+        this.props.navigator.push({ component: Register });
+
     };
 
 
@@ -56,7 +65,7 @@ class Login extends Component {
                 source={pic}
                 style={[styles.container]}
             >
-                <View style={styles.login}>
+                <KeyboardAvoidingView style={styles.login}>
                     <Icon
                         name="bookmark-o"
                         color="#fff"
@@ -111,7 +120,6 @@ class Login extends Component {
                         secureTextEntry={true}
                         onChangeText={(password) => this.setState({password: password})}
                         value={this.state.password}/>
-                    <KeyboardAvoidingView/>
                     <TouchableOpacity
                         style={styles.clearBtn}
                         onPress={this.login}>
@@ -120,11 +128,10 @@ class Login extends Component {
                     <TouchableOpacity
                         onPress={this.login}
                         title="Login"/>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={this.register} >
                         <Text style={styles.whiteText}>Register</Text>
                     </TouchableOpacity>
-
-                </View>
+            </KeyboardAvoidingView>
 
 
             </ImageBackground>
