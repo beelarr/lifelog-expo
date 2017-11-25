@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Home from './Home'
 import Register from './Register';
 import firebase from '../Config/Firebase';
 import styles from '../Theme/Theme';
@@ -35,7 +35,7 @@ class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((data) => {
                 this.setState({uid: data.uid, loading: false});
-
+                this.props.navigator.push({ component: Home });
             }) .catch ((error) => {
             this.setState({loading: false});
             AlertIOS.alert(error.message);
