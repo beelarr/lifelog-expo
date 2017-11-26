@@ -65,7 +65,7 @@ class Login extends Component {
                 source={pic}
                 style={[styles.container]}
             >
-                <KeyboardAvoidingView style={styles.login}>
+                <View style={styles.login}>
                     <Icon
                         name="bookmark-o"
                         color="#fff"
@@ -131,7 +131,8 @@ class Login extends Component {
                     <TouchableOpacity onPress={this.register} >
                         <Text style={styles.whiteText}>Register</Text>
                     </TouchableOpacity>
-            </KeyboardAvoidingView>
+
+            </View>
 
 
             </ImageBackground>

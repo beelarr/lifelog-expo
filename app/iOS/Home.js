@@ -4,7 +4,7 @@ import { Font } from 'expo';
 import Header from '../Components/Header';
 // import Map from './Map';
 import styles from '../Theme/Theme';
-// import Post from './Post';
+import Post from './Post';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
 import Icon1 from 'react-native-vector-icons/FontAwesome';
 import Dimensions from 'Dimensions';
@@ -18,7 +18,8 @@ import {
     Alert,
     View,
     Image,
-    FlatList
+    FlatList,
+    ActivityIndicator
 
 } from 'react-native';
 
@@ -67,12 +68,12 @@ class Home extends Component {
     };
 
 
-    // map = (place) => {
-    //     this.props.navigator.push({
-    //         component: Map,
-    //         passProps: place
-    //     });
-    // };
+    map = (place) => {
+        this.props.navigator.push({
+            component: Map,
+            passProps: place
+        });
+    };
 
 
 
@@ -132,14 +133,21 @@ class Home extends Component {
                         <FlatList
                             data={this.state.food}
                             renderItem={({ item }) => (
+                                 this.state.loading ? (
+                                <ActivityIndicator/>
+                                  ) :
+
                                 <Tile
                                    featured
+                                   onPress={() => this.map(item)}
                                    imageSrc={{uri: `${item.image}`}}
                                    imageContainerStyle={{
                                        borderBottomColor: '#fff',
-                                       borderBottomWidth: 2
+                                       borderBottomWidth: 2,
                                    }}
                                 />
+
+
                             )}
                         />
 
