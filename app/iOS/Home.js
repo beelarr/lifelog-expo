@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import firebase from '../Config/Firebase';
 import { Font } from 'expo';
 import Header from '../Components/Header';
-// import Map from './Map';
+import Login from './Login';
+import Map from './Map';
 import styles from '../Theme/Theme';
 import Post from './Post';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
@@ -68,12 +69,12 @@ class Home extends Component {
     };
 
 
-    map = (place) => {
-        this.props.navigator.push({
-            component: Map,
-            passProps: place
-        });
-    };
+    // map = (place) => {
+    //     this.props.navigator.push({
+    //         component: Map,
+    //         passProps: place
+    //     });
+    // };
 
 
 
@@ -105,7 +106,7 @@ class Home extends Component {
                 <Header
                     onLogOut={() =>{
                         firebase.auth().signOut();
-                        this.props.navigator.popToTop();
+                        this.props.navigator.push({component: Login});
                     }}
                     title={<Icon1
                         name="bookmark-o"
@@ -139,7 +140,7 @@ class Home extends Component {
 
                                 <Tile
                                    featured
-                                   onPress={() => this.map(item)}
+                                   // onPress={() => this.map(item)}
                                    imageSrc={{uri: `${item.image}`}}
                                    imageContainerStyle={{
                                        borderBottomColor: '#fff',
